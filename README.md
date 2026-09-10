@@ -1,36 +1,99 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Intern Assign — Project & Task Dashboard
 
-## Getting Started
+Live demo: https://internassign-vert.vercel.app
 
-First, run the development server:
+A TypeScript + Next.js project that provides a project / task management dashboard with members, activity feed, charts and task actions. The app uses Prisma for database access and a session/auth layer for user sign-in and protected pages.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Key features
+- Dashboard view with project and task summaries
+- Task list with actions (assign, complete, delete, edit)
+- Task charts (visualization of task stats)
+- Project member management (add/remove members)
+- Activity feed to show recent actions
+- Authenticated routes (session/provider layer)
+- Responsive UI components and shared UI primitives
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Tech stack
+- Next.js (App Router, React + TypeScript)
+- TypeScript (main language)
+- Prisma (database ORM)
+- PostCSS / CSS for styling
+- Vercel for deployment (site linked above)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Repository layout (high level)
+- src/
+  - app/ — Next.js app routes and pages
+    - dashboard/ — main dashboard page and UI
+    - login/ — login page
+    - register/ — registration page
+    - projects/ — project pages
+    - page.tsx, layout.tsx, globals.css, favicon
+  - components/ — reusable React components
+    - ActivityFeed.tsx
+    - AddMember.tsx
+    - DeleteProjectButton.tsx
+    - Navbar.tsx
+    - RemoveMemberButton.tsx
+    - SessionProvider.tsx — session/auth wrapper
+    - TaskActions.tsx — task action controls
+    - TaskChart.tsx — chart component
+    - TaskList.tsx — task list UI
+    - ui/ — small UI primitives (eg. button.tsx)
+  - lib/ — utilities and integrations
+    - auth.ts — authentication helpers
+    - prisma.ts — Prisma client wrapper
+    - utils.ts
+- prisma/ — Prisma schema & migrations (project expects Prisma usage)
+- public/ — static assets and favicon
+- next.config.ts, tsconfig.json, postcss.config.mjs, eslint.config.mjs, package.json
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Local setup (quick)
+1. Clone the repo
+   - git clone https://github.com/Sri-Sathwika/intern_assign.git
+2. Install dependencies
+   - npm install
+3. Create environment file
+   - Copy `.env.example` (if present) to `.env` and set values. Typical variables you will need:
+     - DATABASE_URL — connection string for your database
+     - NEXTAUTH_URL — (if using NextAuth) base URL
+     - NEXTAUTH_SECRET — session/crypto secret
+     - Any OAuth client IDs / secrets if third-party sign-in is used
+4. Prepare Prisma
+   - npx prisma generate
+   - npx prisma migrate dev --name init
+5. Run the dev server
+   - npm run dev
+6. Open http://localhost:3000
 
-## Learn More
+Notes: The app uses Prisma — make sure your database is running and DATABASE_URL is set before running migrations.
 
-To learn more about Next.js, take a look at the following resources:
+## Scripts
+Common scripts you’ll likely find in package.json:
+- dev — start the Next.js dev server
+- build — build the production app
+- start — run the production build
+- lint — run ESLint
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+(Inspect package.json for exact script names.)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Deployment
+This project is ready to deploy to Vercel (Next.js first-class hosting). Link your repository, set the same environment variables in the Vercel project settings, and deploy. The live demo is available at the project homepage.
 
-## Deploy on Vercel
+## Contributing
+- Open an issue for feature requests or bugs.
+- Fork the repo, create a feature branch, and send a PR with a clear description and relevant tests or screenshots.
+- Follow the existing code style (TypeScript + React components + CSS/PostCSS).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Troubleshooting & notes
+- If you see issues related to Prisma, confirm the DATABASE_URL and run prisma generate/migrate.
+- If auth/session pages don't work, ensure the session secret and any OAuth credentials are correct and matching your provider settings.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Acknowledgements
+Built with Next.js, React and Prisma.
+
+## License
+No license file present in the repository — add a LICENSE file to make usage terms explicit.
+
+## Contact
+Repository: https://github.com/Sri-Sathwika/intern_assign
+Author: Sri-Sathwika
